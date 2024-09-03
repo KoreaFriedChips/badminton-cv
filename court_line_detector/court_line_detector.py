@@ -3,53 +3,53 @@ import torchvision.transforms as transforms
 import cv2
 import numpy as np
 
-# class CourtLineDetector:
-#     def __init__(self):
-#         # No need to load a model for manual keypoints
-#         self.transform = transforms.Compose([
-#             transforms.ToPILImage(),
-#             transforms.Resize((224, 224)),
-#             transforms.ToTensor(),
-#             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-#         ])
-
-#     def get_manual_keypoints(self, original_w, original_h):
-#         # Replace with your manually determined keypoints
-#         manual_keypoints = np.array([
-#             436, 492, 484, 493, 755, 492, 1025, 493, 1073, 493,
-#             429, 506, 479, 508, 755, 508, 1032, 508, 1081, 508,
-
-#         ], dtype=np.float32)
-
-#         # Scale points to the original image size
-#         manual_keypoints[::2] *= original_w / 224.0
-#         manual_keypoints[1::2] *= original_h / 224.0
-#         return manual_keypoints
-
-#     def predict(self, image):
-#         original_h, original_w = image.shape[:2]
-#         keypoints = self.get_manual_keypoints(original_w, original_h)
-#         print("Keypoints: ", keypoints)
-#         return keypoints
-
 class CourtLineDetector:
     def __init__(self):
-        # # No need to load a model for manual keypoints
-        # self.transform = transforms.Compose([
-        #     transforms.ToPILImage(),
-        #     transforms.Resize((224, 224)),
-        #     transforms.ToTensor(),
-        #     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        # ])
         self.id = 0
 
     def get_manual_keypoints(self):
-        # Replace with your actual values, using the coordinates you got from the image editor
         manual_keypoints = np.array([
-            600, 575,
+            # row 0 (far court back line)
+            604, 575, 
+            675, 575,
+            1048, 575,
+            1420, 575,
             1485, 575,
-            330, 1190,
-            1785, 1190,
+
+            # row 1 (far court doubles service line)
+            597, 600, 
+            665, 600,
+            1048, 600,
+            1425, 600,
+            1492, 600,
+
+            # row 2 (far court service line)
+            535, 725,
+            618, 725,
+            1048, 725,
+            1472, 725,
+            1552, 725,
+
+            # row 3 (close court service line)
+            455, 900,
+            550, 900,
+            1048, 900,
+            1545, 900,
+            1637, 900,
+
+            # row 4 (close court doubles service line)
+            350, 1137,
+            455, 1137,
+            1050, 1137,
+            1645, 1137,
+            1748, 1137,
+
+            # row 5 (close court back line)
+            330, 1187,
+            434, 1187,
+            1052, 1185,
+            1666, 1187,
+            1780, 1187,
 
         ], dtype=np.float32)
 
