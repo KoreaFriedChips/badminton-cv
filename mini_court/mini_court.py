@@ -31,53 +31,109 @@ class MiniCourt():
 
     def convert_meters_to_pixels(self, meters):
         return convert_meters_to_pixel_distance(meters,
-                                                constants.DOUBLE_LINE_WIDTH,
+                                                constants.DOUBLES_LINE_WIDTH,
                                                 self.court_drawing_width
                                             )
 
     def set_court_drawing_key_points(self):
-        drawing_key_points = [0]*28
+        drawing_key_points = [0]*60
 
-        # point 0 
+        # point 0 (row 0, column 0)
         drawing_key_points[0] , drawing_key_points[1] = int(self.court_start_x), int(self.court_start_y)
-        # point 1
+        # point 1 (row 0, column 4)
         drawing_key_points[2] , drawing_key_points[3] = int(self.court_end_x), int(self.court_start_y)
-        # point 2
+        # point 2 (row 3, column 0)
         drawing_key_points[4] = int(self.court_start_x)
         drawing_key_points[5] = self.court_start_y + self.convert_meters_to_pixels(constants.HALF_COURT_LINE_HEIGHT*2)
-        # point 3
+        # point 3 (row 3, column 4)
         drawing_key_points[6] = drawing_key_points[0] + self.court_drawing_width
         drawing_key_points[7] = drawing_key_points[5] 
-        # #point 4
-        drawing_key_points[8] = drawing_key_points[0] +  self.convert_meters_to_pixels(constants.DOUBLE_ALLY_DIFFERENCE)
+        # #point 4 (row 0, column 1)
+        drawing_key_points[8] = drawing_key_points[0] +  self.convert_meters_to_pixels(constants.ALLEY_WIDTH)
         drawing_key_points[9] = drawing_key_points[1] 
-        # #point 5
-        drawing_key_points[10] = drawing_key_points[4] + self.convert_meters_to_pixels(constants.DOUBLE_ALLY_DIFFERENCE)
+        # #point 5 (row 0, column 3)
+        drawing_key_points[10] = drawing_key_points[4] + self.convert_meters_to_pixels(constants.ALLEY_WIDTH)
         drawing_key_points[11] = drawing_key_points[5] 
-        # #point 6
-        drawing_key_points[12] = drawing_key_points[2] - self.convert_meters_to_pixels(constants.DOUBLE_ALLY_DIFFERENCE)
+        # #point 6 (row 3, column 1)
+        drawing_key_points[12] = drawing_key_points[2] - self.convert_meters_to_pixels(constants.ALLEY_WIDTH)
         drawing_key_points[13] = drawing_key_points[3] 
-        # #point 7
-        drawing_key_points[14] = drawing_key_points[6] - self.convert_meters_to_pixels(constants.DOUBLE_ALLY_DIFFERENCE)
+        # #point 7 (row 3, column 3)
+        drawing_key_points[14] = drawing_key_points[6] - self.convert_meters_to_pixels(constants.ALLEY_WIDTH)
         drawing_key_points[15] = drawing_key_points[7] 
-        # #point 8
+        # #point 8 (row 1, column 1)
         drawing_key_points[16] = drawing_key_points[8] 
-        drawing_key_points[17] = drawing_key_points[9] + self.convert_meters_to_pixels(constants.NO_MANS_LAND_HEIGHT)
-        # # #point 9
-        drawing_key_points[18] = drawing_key_points[16] + self.convert_meters_to_pixels(constants.SINGLE_LINE_WIDTH)
+        drawing_key_points[17] = drawing_key_points[9] + self.convert_meters_to_pixels(constants.HALF_COURT_LINE_HEIGHT - constants.SERVICE_LINE_WIDTH)
+        # # #point 9 (row 1, column 3)
+        drawing_key_points[18] = drawing_key_points[16] + self.convert_meters_to_pixels(constants.SINGLES_LINE_WIDTH)
         drawing_key_points[19] = drawing_key_points[17] 
-        # #point 10
+        # #point 10 (row 2, column 1)
         drawing_key_points[20] = drawing_key_points[10] 
-        drawing_key_points[21] = drawing_key_points[11] - self.convert_meters_to_pixels(constants.NO_MANS_LAND_HEIGHT)
-        # # #point 11
-        drawing_key_points[22] = drawing_key_points[20] +  self.convert_meters_to_pixels(constants.SINGLE_LINE_WIDTH)
+        drawing_key_points[21] = drawing_key_points[11] - self.convert_meters_to_pixels(constants.HALF_COURT_LINE_HEIGHT - constants.SERVICE_LINE_WIDTH)
+        # # #point 11 (row 2, column 3)
+        drawing_key_points[22] = drawing_key_points[20] +  self.convert_meters_to_pixels(constants.SINGLES_LINE_WIDTH)
         drawing_key_points[23] = drawing_key_points[21] 
-        # # #point 12
+        # # #point 12 (row 1, column 2)
         drawing_key_points[24] = int((drawing_key_points[16] + drawing_key_points[18])/2)
         drawing_key_points[25] = drawing_key_points[17] 
-        # # #point 13
+        # # #point 13 (row 2, column 2)
         drawing_key_points[26] = int((drawing_key_points[20] + drawing_key_points[22])/2)
         drawing_key_points[27] = drawing_key_points[21] 
+
+        # point 14 (row 0, column 2)
+        drawing_key_points[28] = drawing_key_points[0] + self.convert_meters_to_pixels(constants.DOUBLES_LINE_WIDTH/2)
+        drawing_key_points[29] = drawing_key_points[1]
+        # point 15 (row 3, column 2)
+        drawing_key_points[30] = drawing_key_points[28]
+        drawing_key_points[31] = drawing_key_points[1] + self.convert_meters_to_pixels(constants.HALF_COURT_LINE_HEIGHT*2)
+
+        # point 16 - 20 (far court, back service line)
+        # point 16
+        drawing_key_points[32] = drawing_key_points[0]
+        drawing_key_points[33] = drawing_key_points[1] + self.convert_meters_to_pixels(constants.DOUBLES_SERVICE_LINE_WIDTH)
+        # point 17
+        drawing_key_points[34] = drawing_key_points[8]
+        drawing_key_points[35] = drawing_key_points[33] 
+        # point 18
+        drawing_key_points[36] = drawing_key_points[28]
+        drawing_key_points[37] = drawing_key_points[33] 
+        # point 19
+        drawing_key_points[38] = drawing_key_points[18]
+        drawing_key_points[39] = drawing_key_points[33]
+
+        # point 20
+        drawing_key_points[40] = drawing_key_points[2]
+        drawing_key_points[41] = drawing_key_points[33]
+
+        # point 21 - 25 (close court, back service line)
+        # point 21
+        drawing_key_points[42] = drawing_key_points[0]
+        drawing_key_points[43] = drawing_key_points[31] - self.convert_meters_to_pixels(constants.DOUBLES_SERVICE_LINE_WIDTH)
+        # point 22
+        drawing_key_points[44] = drawing_key_points[8]
+        drawing_key_points[45] = drawing_key_points[43] 
+        # point 23
+        drawing_key_points[46] = drawing_key_points[28]
+        drawing_key_points[47] = drawing_key_points[43] 
+        # point 24
+        drawing_key_points[48] = drawing_key_points[18]
+        drawing_key_points[49] = drawing_key_points[43]
+        # point 25
+        drawing_key_points[50] = drawing_key_points[2]
+        drawing_key_points[51] = drawing_key_points[43]
+
+        # extend service line on both sides to doubles line
+        # point 26
+        drawing_key_points[52] = drawing_key_points[0]
+        drawing_key_points[53] = drawing_key_points[17]
+        # point 27
+        drawing_key_points[54] = drawing_key_points[2]
+        drawing_key_points[55] = drawing_key_points[17] 
+        # point 28
+        drawing_key_points[56] = drawing_key_points[0]
+        drawing_key_points[57] = drawing_key_points[21] 
+        # point 29
+        drawing_key_points[58] = drawing_key_points[2]
+        drawing_key_points[59] = drawing_key_points[21]
 
         self.drawing_key_points=drawing_key_points
 
@@ -87,12 +143,15 @@ class MiniCourt():
             (4, 5),
             (6,7),
             (1,3),
+            (12, 14),
+            (13, 15),
             
             (0,1),
-            (8,9),
-            (10,11),
-            (10,11),
-            (2,3)
+            (26,27),
+            (28,29),
+            (2,3),
+            (16, 20),
+            (21, 25),
         ]
 
     def set_mini_court_position(self):
